@@ -20,20 +20,20 @@ A RPG text-based console game
 
 ## Features
 
-- [ ]  Randomly generated initial stats
+- [X]  Randomly generated initial stats
 - [ ]  Random events in mid-game
-- [ ]  Save and load game progress locally
+- [X]  Save and load game progress locally
 - [ ]  Locally saved scoreboard
-- [ ]  3 difficulty level
+- [X]  3 difficulty level
 
 
 
 ## Code Requirment
-- [ ]  Generation of random game sets or events                 --> Use of rand() to generate initial stats and events. (Feature 1&2)
-- [ ]  Data structures for storing game status                  --> Use of struct to create and store user stats. (Feature 1&4)
-- [ ]  Dynamic memory management                                --> Use of pointer to dynamicly allocate memory. (Example: Dynamic sized array for inventory tracking. Array deletion when random event is finished. delete[])
-- [ ]  File input/output (e.g., for loading/saving game status) --> Use of fileio to save and reload game progress and scoreboard. (Feature 3&4)
-- [ ]  Program codes in multiple files
+- [X]  Generation of random game sets or events                 --> Use of rand() to generate initial stats and events. (Feature 1&2)
+- [X]  Data structures for storing game status                  --> Use of struct to create and store user stats. (Feature 1&4)
+- [X]  Dynamic memory management                                --> Use of pointer to dynamicly allocate memory. (Example: Dynamic sized array for inventory tracking. Array deletion when random event is finished. delete[])
+- [X]  File input/output (e.g., for loading/saving game status) --> Use of fileio to save and reload game progress and scoreboard. (Feature 3&4)
+- [X]  Program codes in multiple files
 - [ ]  Proper indentation and naming styles
 - [ ]  In-code documentation
 
@@ -43,6 +43,5 @@ Compile the program with any C++ compiler
 (g++ in linux / Mingw-w64 in Windows)
 
 ```bash
-  make ( Utilize the makefile. TODO )
-  g++ -pedantic-errors -std=c++11
+  make main
 ```

@@ -51,7 +51,8 @@ void save(character_stats &p) {
 	std::ofstream output_stream;
 	output_stream.open((filename + ".gamesave").c_str());
 	output_stream << p.read_stat() << std::endl;
-	output_stream << p.read_name();
+	output_stream << p.read_name() << std::endl;
+	output_stream << p.date << std::endl;
 	output_stream.close();
 }
 
@@ -67,18 +68,22 @@ void load(character_stats &p) {
 		// Check in case for no reason open failed?
 		if (!input_stream.fail()) {
 			std::string value_name, value;
-			for (int i = 0; i < 7; i++) {
+			for (int i = 0; i < 10; i++) {
 				input_stream >> value_name >> value;
 				p.change_stat(value_name, std::stoi(value), true);
 			}
 			// Dummy pipe to move to next line.
-			input_stream >> value;
 			std::getline(input_stream, value);
-			std::cout << value;
+			std::getline(input_stream, value);
 			p.change_name(value);
-
+			std::getline(input_stream, value);
+			p.date = stoi(value);
+			input_stream.close();
 		}
 		std::cout << std::endl;
+	}
+	else {
+		std::cout << "File not found" << std::endl;
 	}
 
 }
