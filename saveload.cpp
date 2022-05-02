@@ -53,6 +53,7 @@ void save(character_stats &p) {
 	output_stream << p.read_stat() << std::endl;
 	output_stream << p.read_name() << std::endl;
 	output_stream << p.date << std::endl;
+	output_stream << p.money << std::endl;
 	output_stream.close();
 }
 
@@ -78,6 +79,8 @@ void load(character_stats &p) {
 			p.change_name(value);
 			std::getline(input_stream, value);
 			p.date = stoi(value);
+			std::getline(input_stream, value);
+			p.money = stoi(value);
 			input_stream.close();
 		}
 		std::cout << std::endl;

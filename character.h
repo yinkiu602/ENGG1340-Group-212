@@ -15,6 +15,7 @@ class character_stats {
 		bool change_inventory(std::string action, int position, std::string item_name);
 		bool change_name(std::string input_name);
 		int date = 0;
+		int money = 100;
 	private:
 		int hp, mp, atk, def, wis, vit, stamina, difficulty;
 		int hp_max, mp_max, sta_max = 100;
