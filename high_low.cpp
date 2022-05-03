@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "character.h"
-#include "high-low.h"
+#include "high_low.h"
 #include "random.h"
 
 struct card {
@@ -27,7 +27,7 @@ const card cards[13] =
 };
 
 card slotCard, pickedCard;
-double bet;
+int hilo_bet;
 int winnings;
 int actionDecider = 0;
 
@@ -78,9 +78,9 @@ bool high_low(character_stats* p) {
         if (user_input == 2) { break; }
         std::cout << "You currently have: " << p->money << std::endl;
         while (true) {
-            std::cout << "Your bet: ";
-            std::cin >> bet;
-            if (bet <= p->money) { break; }
+            std::cout << "Your hilo_bet: ";
+            std::cin >> hilo_bet;
+            if (hilo_bet <= p->money) { break; }
             std::cout << "Insufficient money! Enter another amount!" << std::endl;
         }
  
@@ -93,19 +93,19 @@ bool high_low(character_stats* p) {
             pickedCard = cards[randomizer(13)];
             std::cout << "Next Card: " << pickedCard.name << std::endl;
             if ((pickedCard.value < slotCard.value) && (actionDecider == 1)) {
-                winnings += bet * calLowerPayout(slotCard);
+                winnings += hilo_bet * calLowerPayout(slotCard);
                 std::cout << "You are right!, Your current winnings: " << winnings << std::endl;
             }
             else if ((pickedCard.value < slotCard.value) && (actionDecider == 2)) {
-                winnings -= bet;
+                winnings -= hilo_bet;
                 std::cout << "You are wrong!, Your current winnings: " << winnings << std::endl;
             }
             else if ((pickedCard.value > slotCard.value) && (actionDecider == 2)) {
-                winnings += bet * calHigherPayout(slotCard);
+                winnings += hilo_bet * calHigherPayout(slotCard);
                 std::cout << "You are right!, Your current winnings: " << winnings << std::endl;
             }
             else if ((pickedCard.value > slotCard.value) && (actionDecider == 1)) {
-                winnings -= bet;
+                winnings -= hilo_bet;
                 std::cout << "You are right!, Your current winnings: " << winnings << std::endl;
             }
             slotCard = pickedCard;

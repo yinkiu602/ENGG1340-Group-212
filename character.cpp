@@ -2,6 +2,7 @@
 #include "random.h"
 #include <string>
 #include <iostream>
+#include <algorithm>
 
 
 void character_stats::initialize() {

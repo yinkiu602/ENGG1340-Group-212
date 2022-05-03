@@ -31,7 +31,7 @@ std::string houseCard[21] = {};
 int playerSum = 0, houseSum = 0;
 
 int hitStandDecider;
-int bet;
+int blackjack_bet;
 int randomint;
 int playerCardCounter = 2, houseCardCounter = 2;
 
@@ -43,7 +43,7 @@ void clear_status() {
     playerSum = 0;
     houseSum = 0;
     hitStandDecider = -1;
-    bet = -1;
+    blackjack_bet = -1;
     randomint = -1;
     playerCardCounter = 2;
     houseCardCounter = 2;
@@ -109,18 +109,18 @@ bool blackjack(character_stats* p) {
         if (user_input == 2) { break; }
         std::cout << "You currently have: " << p->money << std::endl;
         while (true) {
-            std::cout << "Your bet: ";
-            std::cin >> bet;
-            if (bet <= p->money) { break; }
+            std::cout << "Your blackjack_bet: ";
+            std::cin >> blackjack_bet;
+            if (blackjack_bet <= p->money) { break; }
             std::cout << "Insufficient money! Enter another amount!" << std::endl;
         }
-        p->money -= bet;
+        p->money -= blackjack_bet;
         initializeGame();
         std::cin >> hitStandDecider;
         while (hitStandDecider != 2) {
 
             if (playerSum > 21) {
-                std::cout << "You busted!" << std::endl << "You have lost " << bet << " credits" << std::endl;
+                std::cout << "You busted!" << std::endl << "You have lost " << blackjack_bet << " credits" << std::endl;
                 return 0;
             }
 
@@ -133,8 +133,8 @@ bool blackjack(character_stats* p) {
             }
 
             if (hitStandDecider == 3) {
-                p->money -= bet;
-                bet *= 2;
+                p->money -= blackjack_bet;
+                blackjack_bet *= 2;
                 randomint = randomizer(13);
                 playerCard[playerCardCounter] = cards[randomint].name;
                 playerSum += cards[randomint].value;
@@ -147,20 +147,20 @@ bool blackjack(character_stats* p) {
         }
         if (houseMove()) {
             if (playerSum > houseSum) {
-                std::cout << "You win!" << std::endl << "You have won " << bet << " credits" << std::endl;
-                p->money += (bet * 2);
+                std::cout << "You win!" << std::endl << "You have won " << blackjack_bet << " credits" << std::endl;
+                p->money += (blackjack_bet * 2);
             }
             else if (playerSum == houseSum) {
                 std::cout << "It's a push!" << std::endl << "You win and lose nothing." << std::endl;
-                p->money += bet;
+                p->money += blackjack_bet;
             }
             else if (houseSum > playerSum) {
-                std::cout << "You lost!" << std::endl << "You have lost " << bet << " credits" << std::endl;
+                std::cout << "You lost!" << std::endl << "You have lost " << blackjack_bet << " credits" << std::endl;
             }
         }
         else {
-            std::cout << "House busted!" << std::endl << "You have won " << bet << " credits" << std::endl;
-            p->money += (bet * 2);
+            std::cout << "House busted!" << std::endl << "You have won " << blackjack_bet << " credits" << std::endl;
+            p->money += (blackjack_bet * 2);
         }
         std::cout << "Game over! Do you want to start a new game? Type (1) to indicate Yes. (2) to indicate No." << std::endl;
         std::cin >> user_input;

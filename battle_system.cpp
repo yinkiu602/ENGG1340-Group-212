@@ -7,18 +7,18 @@
 #include <string>
 
 // Enable only when compile in linux
-//#include <sys/ioctl.h>
+#include <sys/ioctl.h>
 
 
 
 // Enable only when compile in linux
-//struct winsize console_window;
+struct winsize console_window;
 // Enable only when compile in linux
-//int windows_width() {
-//	ioctl(1, TIOCGWINSZ, &console_window);
-//	return console_window.ws_col;
-//
-//}
+int windows_width() {
+	ioctl(1, TIOCGWINSZ, &console_window);
+	return console_window.ws_col;
+
+}
 
 std::string hp_bar(int hp, int hp_max, int width = 13) {
 	return (std::string((width * hp / hp_max), '+') + std::string((width - width * hp / hp_max), '-'));
@@ -28,13 +28,13 @@ std::string hp_bar(int hp, int hp_max, int width = 13) {
 void print_entites(std::string type) {
 	if (type == "boss") {
 		// Change from 90 to windows_width() when compile on linux
-		std::cout << std::setw(90) << std::right << "*****************" << std::endl;
-		std::cout << std::setw(90) << std::right << "/     BOSS1     /" << std::endl;
-		std::cout << std::setw(90) << std::right << "/               /" << std::endl;
-		std::cout << std::setw(90) << std::right << "/  HP: 50 / 50  /" << std::endl;
-		std::cout << std::setw(90) << std::right << "/ " + hp_bar(50, 50) + " /" << std::endl;
-		std::cout << std::setw(90) << std::right << "/               /" << std::endl;
-		std::cout << std::setw(90) << std::right << "*****************" << std::endl;
+		std::cout << std::setw(windows_width()) << std::right << "*****************" << std::endl;
+		std::cout << std::setw(windows_width()) << std::right << "/     BOSS1     /" << std::endl;
+		std::cout << std::setw(windows_width()) << std::right << "/               /" << std::endl;
+		std::cout << std::setw(windows_width()) << std::right << "/  HP: 50 / 50  /" << std::endl;
+		std::cout << std::setw(windows_width()) << std::right << "/ " + hp_bar(50, 50) + " /" << std::endl;
+		std::cout << std::setw(windows_width()) << std::right << "/               /" << std::endl;
+		std::cout << std::setw(windows_width()) << std::right << "*****************" << std::endl;
 	}
 	if (type == "player") {
 		std::cout << "*****************" << std::endl;
@@ -49,15 +49,15 @@ void print_entites(std::string type) {
 
 void message_box() {
 	// Enable when in linux
-	//int width = windows_width() * 0.8;
+	int width = windows_width() * 0.8;
 	//// Print the first line
-	//for (int i = 0; i < (int) ((windows_width() - width) / 2); i++) {
-	//	std::cout << " ";
-	//}
-	//for (int i = 0; i < width; i++) {
-	//	std::cout << "*";
-	//}
-	//std::cout << std::endl;
+	for (int i = 0; i < (int) ((windows_width() - width) / 2); i++) {
+		std::cout << " ";
+	}
+	for (int i = 0; i < width; i++) {
+		std::cout << "*";
+	}
+	std::cout << std::endl;
 
 	//print middle
 
@@ -65,13 +65,13 @@ void message_box() {
 
 
 	// Print last lime
-	//for (int i = 0; i < (int)((windows_width() - width) / 2); i++) {
-	//	std::cout << " ";
-	//}
-	//for (int i = 0; i < width; i++) {
-	//	std::cout << "*";
-	//}
-	//std::cout << std::endl;
+	for (int i = 0; i < (int)((windows_width() - width) / 2); i++) {
+		std::cout << " ";
+	}
+	for (int i = 0; i < width; i++) {
+		std::cout << "*";
+	}
+	std::cout << std::endl;
 }
 
 bool damage_calculation(character_stats* p, std::string entity_type, std::string stat_name, int hp) {

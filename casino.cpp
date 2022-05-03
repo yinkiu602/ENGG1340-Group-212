@@ -1,7 +1,7 @@
 #include "casino.h"
 #include "character.h"
 #include "blackjack.h"
-#include "high-low.h"
+#include "high_low.h"
 #include <iostream>
 
 void casino_menu(character_stats* p) {
