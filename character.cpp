@@ -60,7 +60,7 @@ void character_stats::initialize() {
 }
 
 void character_stats::display_stat() {
-	std::cout << "HP: " << hp  <<  "/" << hp_max << " MP: " << mp << "/" << mp_max << " ATK: " << atk << " DEF: " << def << " WIS: " << wis << " VIT: " << vit << " STA: " << stamina << "/" << sta_max << std::endl;
+	std::cout << "HP: " << hp << "/" << hp_max << " MP: " << mp << "/" << mp_max << " ATK: " << atk << " DEF: " << def << " WIS: " << wis << " VIT: " << vit << " STA: " << stamina << "/" << sta_max << std::endl;
 }
 
 void character_stats::display_inventory() {
@@ -177,13 +177,34 @@ bool character_stats::change_name(std::string input_name) {
 	return true;
 }
 
-bool character_stats::change_equipeed(std::string action, int index) {
+bool character_stats::change_equipeed(std::string action, std::string equip_name) {
 	if (action == "equip") {
-		equipped.push_back(index);
+		equipped.push_back(equip_name);
 		return true;
 	}
 	else {
-		equipped.erase(equipped.begin() + index);
+		std::vector<std::string>::iterator position = std::find(equipped.begin(), equipped.end(), equip_name);
+		if (position != equipped.end()) {
+			equipped.erase(position);
+			return true;
+		}
+	}
+}
+
+bool character_stats::search_equipped(std::string equip_name) {
+	if (std::find(equipped.begin(), equipped.end(), equip_name) != equipped.end()) {
 		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+bool character_stats::search_inventory(std::string item_name) {
+	if (std::find(inventory.begin(), inventory.end(), item_name) != inventory.end()) {
+		return true;
+	}
+	else {
+		return false;
 	}
 }

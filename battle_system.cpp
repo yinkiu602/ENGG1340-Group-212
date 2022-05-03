@@ -1,7 +1,7 @@
 // Prototype
 #include "battle_system.h"
 #include "character.h"
-
+#include "item.h"
 #include <iostream>
 #include <iomanip>
 #include <string>
