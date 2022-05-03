@@ -10,5 +10,8 @@ int randomizer(int mod) {
 		random_value = (unsigned int)time(NULL);
 		srand(random_value);
 	}
-	return (rand() % mod);
+	if (mod == 0) { mod = 1; }
+	int result = rand() % mod;
+	if (result == 0) { result = 1; }
+	return result;
 }

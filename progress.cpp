@@ -25,7 +25,7 @@ void main_story(character_stats *p) {
 			std::cout << "\033[2J\033[1;1H";
 		}
 		else if (user_option == "2") {
-			battle_system(p);
+			battle_system(p,"");
 			//casino_menu(p);
 		}
 		else if (user_option == "3") {
