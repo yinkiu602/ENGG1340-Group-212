@@ -43,5 +43,5 @@ int main() {
 			main_story(&character);
 		}
 	}
-
+	return 0;
 }

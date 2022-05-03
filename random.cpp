@@ -2,7 +2,13 @@
 #include <ctime>
 #include <cstdlib>
 
+
+unsigned int random_value = 0;
 int randomizer(int mod) {
-	srand((unsigned int)time(0));
+	// Prevent repeatedly calling srand. Resulting in same random number generated everytime.
+	if (random_value == 0) {
+		random_value = (unsigned int)time(NULL);
+		srand(random_value);
+	}
 	return (rand() % mod);
 }

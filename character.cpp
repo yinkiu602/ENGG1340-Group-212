@@ -170,10 +170,20 @@ bool character_stats::change_inventory(std::string action, int position, std::st
 	else {
 		return false;
 	}
-
 }
 
 bool character_stats::change_name(std::string input_name) {
 	name = input_name;
 	return true;
+}
+
+bool character_stats::change_equipeed(std::string action, int index) {
+	if (action == "equip") {
+		equipped.push_back(index);
+		return true;
+	}
+	else {
+		equipped.erase(equipped.begin() + index);
+		return true;
+	}
 }

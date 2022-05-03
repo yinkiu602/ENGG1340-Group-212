@@ -13,6 +13,7 @@ class character_stats {
 		bool change_stat(std::string stat_name, int delta, bool abs = false);
 		int read_specific_stat(std::string stat_name);
 		bool change_inventory(std::string action, int position, std::string item_name);
+		bool change_equipeed(std::string action, int index);
 		bool change_name(std::string input_name);
 		int date = 0;
 		int money = 100;
@@ -21,6 +22,7 @@ class character_stats {
 		int hp_max, mp_max, sta_max = 100;
 		std::string name = "";
 		std::vector<std::string> inventory;
+		std::vector<int> equipped;
 };
 
 

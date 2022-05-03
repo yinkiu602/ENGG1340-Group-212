@@ -2,6 +2,7 @@
 #include "training.h"
 #include "battle_system.h"
 #include "shop.h"
+#include "casino.h"
 #include <iostream>
 
 void main_story(character_stats *p) {
@@ -24,10 +25,13 @@ void main_story(character_stats *p) {
 			std::cout << "\033[2J\033[1;1H";
 		}
 		else if (user_option == "2") {
-			battle_system(p);
+			casino_menu(p);
+			//battle_system(p);
 		}
 		else if (user_option == "3") {
 			p->display_stat();
+			std::cout << std::endl;
+			p->display_inventory();
 			std::cout << std::endl;
 		}
 		else if (user_option == "4") {

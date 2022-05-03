@@ -2,7 +2,7 @@
 #define shop_h
 
 #include <iostream>
-#include <character.h>
+#include "character.h"
 
 int shop(character_stats *p);
 
