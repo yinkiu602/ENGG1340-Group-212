@@ -29,7 +29,7 @@ progress.o: progress.cpp progress.h character.h training.h events.h random.h
 	g++ $(FLAGS) -c $<
 main.o: main.cpp character.h saveload.h progress.h
 	g++ $(FLAGS) -c $<
-main: main.o random.o character.o saveload.o training.o battle_system.o shop.o item.o blackjack.o high_low.o casino.o progress.o
+main: main.o random.o character.o saveload.o training.o battle_system.o shop.o item.o blackjack.o high_low.o casino.o progress.o events.o
 	g++ $(FLAGS) $^ -o $@
 
 clean:

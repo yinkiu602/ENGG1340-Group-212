@@ -9,16 +9,7 @@
 struct enemy {
   int hp, mp, atk, def, wis, vit;
 };
-int charhp = p->read_specific_stat("HP");
-int charmp = p->read_specific_stat("MP");
-int charatk = p->read_specific_stat("ATK")
-int chardef = p->read_specific_stat("DEF");
-int charwis = p->read_specific_stat("WIS");
-int charvit = p->read_specific_stat("VIT");
 
-enemy boss = {5000, 300, 500, 500, 350, 300};
-enemy small = {charhp-randomizer(charhp/3), charmp-randomizer(champ/3), charatk-randomizer(charatk/3), chardef-randomizer(chardef/3), charwis-randomizer(charwis/3), charvit-randomizer(charvit/3)};
-enemy big = {charhp+randomizer(charhp/3), charmp+randomizer(champ/3), charatk+randomizer(charatk/3), chardef+randomizer(chardef/3), charwis+randomizer(charwis/3), charvit+randomizer(charvit/3)};
 // Enable only when compile in linux
 //#include <sys/ioctl.h>
 
@@ -102,6 +93,16 @@ bool damage_calculation(character_stats* p, std::string entity_type, std::string
 
 }
 bool battle_system(character_stats* p) {
+    int charhp = p->read_specific_stat("HP");
+    int charmp = p->read_specific_stat("MP");
+    int charatk = p->read_specific_stat("ATK");
+    int chardef = p->read_specific_stat("DEF");
+    int charwis = p->read_specific_stat("WIS");
+    int charvit = p->read_specific_stat("VIT");
+
+    enemy boss = {5000, 300, 500, 500, 350, 300};
+    enemy small = {charhp-randomizer(charhp/3), charmp-randomizer(charmp/3), charatk-randomizer(charatk/3), chardef-randomizer(chardef/3), charwis-randomizer(charwis/3), charvit-randomizer(charvit/3)};
+    enemy big = {charhp+randomizer(charhp/3), charmp+randomizer(charmp/3), charatk+randomizer(charatk/3), chardef+randomizer(chardef/3), charwis+randomizer(charwis/3), charvit+randomizer(charvit/3)};
 	bool ended = false;
 	//while (!ended) {
 		

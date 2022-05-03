@@ -61,7 +61,9 @@ void mysteriousMan(character_stats *p) {
 
 void addRandomStat(character_stats *p) {
   std::string statname[5] = {"ATK", "DEF", "WIS", "STA", "VIT"};
-  p->change_stat(statname[randomizer(4)], 5);
+  int statadddecider = randomizer(5);
+  p->change_stat(statname[statadddecider], 5);
+  std::cout << "You felt a warm pulse inside you, you think you have understood something. (" << statname[statadddecider] << " increased)" << std::endl;
 }
 
 void beggar(character_stats *p) {
@@ -77,7 +79,6 @@ void beggar(character_stats *p) {
     }
     else if (beggarDecider == 1) {
       std::cout << "Thank you good sir, may the god bless you." << std::endl;
-      std::cout << "You felt a warm pulse inside you, you think you have understood something. (Stat increased)" << std::endl;
       addRandomStat(p);
       break;
     }
@@ -88,7 +89,7 @@ void beggar(character_stats *p) {
 
 void events(character_stats *p) {
   int decider = randomizer(10);
-  if (decider >= 9) {
+  if (decider >= 8) {
     mysteriousMan(p);
   }
   else beggar(p);

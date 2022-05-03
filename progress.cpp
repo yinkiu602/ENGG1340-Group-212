@@ -12,9 +12,9 @@ void main_story(character_stats *p) {
     int randomeventdecider = randomizer(10);
 	std::string user_option;
 	std::cout << "\033[2J\033[1;1H"; // Clear the screen and allow the lines to be printed on top
-
 	std::cout << "Day " << p->date << ". " << "Hi, " << p->read_name() << "! Such a good day today! What do you want to do? (1-6)" << std::endl;
 	while (true) {
+//        std::cout << "random value of the day: " << randomeventdecider << std::endl;
 		std::cout << p->date << std::endl;
 		std::cout << "1. Train yourself" << std::endl;
 		std::cout << "2. Feeling lucky, go casino" << std::endl;
@@ -24,7 +24,7 @@ void main_story(character_stats *p) {
 		std::cout << "6. Return to main menu" << std::endl;
 		std::cin >> user_option;
 		if (user_option == "1") {
-            if (randomeventdecider >= 9) {
+            if (randomeventdecider >= 6) {
               events(p);
               randomeventdecider = -1;
             }
@@ -32,7 +32,7 @@ void main_story(character_stats *p) {
 			std::cout << "\033[2J\033[1;1H";
 		}
 		else if (user_option == "2") {
-            if (randomeventdecider >= 9) {
+            if (randomeventdecider >= 6) {
               events(p);
               randomeventdecider = -1;
             }
@@ -46,13 +46,14 @@ void main_story(character_stats *p) {
 			std::cout << std::endl;
 		}
 		else if (user_option == "4") {
-            if (randomeventdecider >= 9) {
+            if (randomeventdecider >= 6) {
               events(p);
               randomeventdecider = -1;
             }
             shop(p);
 		}
 		else if (user_option == "5") {
+            randomeventdecider = randomizer(10);
 			p->date++;
 			p->change_stat("STA", p->read_specific_stat("STA_MAX"), true);
 		}
