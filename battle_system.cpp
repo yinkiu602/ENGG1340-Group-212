@@ -15,7 +15,7 @@ int charhp, charmp, charatk, chardef, charwis, charvit, emeny_max_hp;
 int attack_damage_calculation, receive_damage_calculation;
 
 // Enable only when compile in linux
-#include <sys/ioctl.h>
+//#include <sys/ioctl.h>
 
 
 
@@ -24,8 +24,6 @@ struct winsize console_window;
 int windows_width() {
 	ioctl(1, TIOCGWINSZ, &console_window);
 	return console_window.ws_col;
-
-}
 
 std::string hp_bar(int hp, int hp_max, int width = 13) {
 	return (std::string((width * hp / hp_max), '+') + std::string((width - width * hp / hp_max), '-'));
@@ -107,13 +105,13 @@ void message_box() {
 	
 	
 	// Print last lime
-	for (int i = 0; i < (int)((windows_width() - width) / 2); i++) {
-		std::cout << " ";
-	}
-	for (int i = 0; i < width; i++) {
-		std::cout << "*";
-	}
-	std::cout << std::endl;
+	//for (int i = 0; i < (int)((windows_width() - width) / 2); i++) {
+	//	std::cout << " ";
+	//}
+	//for (int i = 0; i < width; i++) {
+	//	std::cout << "*";
+	//}
+	//std::cout << std::endl;
 }
 
 bool damage_calculation(character_stats* p, std::string entity_type, std::string stat_name, int hp) {
@@ -158,57 +156,10 @@ bool battle_system(character_stats* p, std::string enemy_name) {
 	bool ended = false;
 	int user_input;
 	std::cout << "\033[2J\033[1;1H"; // Clear the screen and allow the lines to be printed on top
-	while (!ended) {
-		print_entites("boss");
-		std::cout << std::endl << std::endl << std::endl;
-		print_entites("player");
-		message_box();
-		while (true) {
-			std::cout << "Please indicate your intent: ";
-			std::cin >> user_input;
-			if (std::cin.fail() || user_input < 1 || user_input > 3) {
-				std::cin.clear();
-				std::cin.ignore(10000, '\n');
-				std::cout << "Input not recognized. Please enter a number only!" << std::endl << std::endl;
-				continue;
-			}
-			break;
-		}
-		if (user_input == 1) {
-			attack_damage_calculation = p->read_specific_stat("ATK") - to_fight.def;
-			if (attack_damage_calculation <= 0) {
-				attack_damage_calculation = 0;
-			}
-			to_fight.hp -= attack_damage_calculation;
-			std::cout << "You damage the emeny for " << attack_damage_calculation << " HP!" << std::endl;
-			receive_damage_calculation = to_fight.atk - p->read_specific_stat("DEF");
-			if (receive_damage_calculation <= 0) {
-				receive_damage_calculation = 0;
-			}
-			p->change_stat("HP", -receive_damage_calculation);
-			std::cout << "The emeny attacked us for " << receive_damage_calculation << " HP!" << std::endl;
-			if (p->read_specific_stat("HP") <= 0 || to_fight.hp <= 0) {
-				ended = true;
-			}
-		}
-		else if (user_input == 2) {
-			receive_damage_calculation = to_fight.atk - p->read_specific_stat("DEF") * 2;
-			if (receive_damage_calculation <= 0) {
-				receive_damage_calculation = 0;
-			}
-			p->change_stat("HP", -receive_damage_calculation);
-			std::cout << "The emeny attacked us for " << receive_damage_calculation << " HP!" << std::endl;
-			if (p->read_specific_stat("HP") <= 0 || to_fight.hp <= 0) {
-				ended = true;
-			}
-		}
-		else {
-			p->display_inventory();
-			std::cout << "Which item you want to use? Enter the corresponding index: ";
-			std::cin >> user_input;
-		}
-	}
-
+	print_entites("boss");
+	std::cout << std::endl << std::endl << std::endl;
+	print_entites("player");
+	message_box();
 	return true;
 }
 
