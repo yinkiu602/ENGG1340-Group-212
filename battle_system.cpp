@@ -15,7 +15,7 @@ int charhp, charmp, charatk, chardef, charwis, charvit, emeny_max_hp;
 int attack_damage_calculation, receive_damage_calculation;
 
 // Enable only when compile in linux
-//#include <sys/ioctl.h>
+#include <sys/ioctl.h>
 
 
 
@@ -24,6 +24,7 @@ struct winsize console_window;
 int windows_width() {
 	ioctl(1, TIOCGWINSZ, &console_window);
 	return console_window.ws_col;
+}
 
 std::string hp_bar(int hp, int hp_max, int width = 13) {
 	return (std::string((width * hp / hp_max), '+') + std::string((width - width * hp / hp_max), '-'));

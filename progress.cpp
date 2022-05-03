@@ -15,7 +15,7 @@ void main_story(character_stats *p) {
 	std::cout << "Day " << p->date << ". " << "Hi, " << p->read_name() << "! Such a good day today! What do you want to do? (1-6)" << std::endl;
 	while (true) {
 //        std::cout << "random value of the day: " << randomeventdecider << std::endl;
-		std::cout << p->date << std::endl;
+		std::cout << "Date: " << p->date << std::endl;
 		std::cout << "1. Train yourself" << std::endl;
 		std::cout << "2. Feeling lucky, go casino" << std::endl;
 		std::cout << "3. Check my character" << std::endl;
@@ -32,7 +32,7 @@ void main_story(character_stats *p) {
 			std::cout << "\033[2J\033[1;1H";
 		}
 		else if (user_option == "2") {
-			battle_system(p);
+			battle_system(p, "");
 			//casino_menu(p);
 		}
 		else if (user_option == "3") {
