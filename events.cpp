@@ -3,8 +3,8 @@
 #include "character.h"
 #include "random.h"
 
-std::random_device randomizer;
-std::mt19937 generator(randomizer());
+std::random_device randomiser;
+std::mt19937 generator(randomiser());
 std::uniform_int_distribution<> range(0, 3);
 
 struct item {
@@ -59,6 +59,11 @@ void mysteriousMan(character_stats *p) {
   }
 }
 
+void addRandomStat(character_stats *p) {
+  std::string statname[5] = {"ATK", "DEF", "WIS", "STA", "VIT"};
+  p->change_stat(statname[randomizer(4)], 5);
+}
+
 void beggar(character_stats *p) {
   std::cout << "As you walked down the road, you see a beggar begging for money..." << std::endl;
   std::cout << "Goodday sir, would you mind sparing me a few clangs?" << std::endl;
@@ -79,11 +84,6 @@ void beggar(character_stats *p) {
     std::cout << "Invalid option!" << std::endl;
     std::cin >> beggarDecider;
   }
-}
-
-void addRandomStat(character_stats *p) {
-  std::string statname[5] = {"ATK", "DEF", "WIS", "STA", "VIT"};
-  p->change_stat(statname[randomizer(4)], 5);
 }
 
 void events(character_stats *p) {

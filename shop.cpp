@@ -1,7 +1,7 @@
 #include <iostream>
 #include "character.h"
 
-const int shopListMax = 5;
+const int shopListMax = 20;
 int itemDecider = -999;
 
 struct item {
@@ -10,16 +10,28 @@ struct item {
     int atk, def, wis, vit, sta;
     int stock;
     int price;
-    int id;
 };
 
 item shopInventory[shopListMax] = {
-        {"Iron Armor", "equipment", 0, 10, 0, 0, -5, 1, 100, 1},
-        {"Apprentice Robe", "equipment", 0, 0, 5, 0, 5, 1, 100, 2},
-        {"Iron Sword", "equipment", 10, 0, 0, 0, -1, 1, 100, 3},
-        {"Apprentice Staff", "equipment", 0, 0, 10, 0, 0, 1, 100, 4}
+        {"Iron Armor", "equipment", 0, 10, 0, 0, -5, 1, 100},
+        {"Apprentice Robe", "equipment", 0, 0, 5, 0, 5, 1, 100},
+        {"Iron Sword", "equipment", 10, 0, 0, 0, -1, 1, 100},
+        {"Apprentice Staff", "equipment", 0, 0, 10, 0, 0, 1, 100},
+        {"Steel Armor", "equipment", 0, 10, 0, 0, -5, 1, 1000},
+        {"Regular Robe", "equipment", 0, 0, 5, 0, 5, 1, 1000},
+        {"Steel Sword", "equipment", 10, 0, 0, 0, -1, 1, 1000},
+        {"Regular Staff", "equipment", 0, 0, 10, 0, 0, 1, 1000},
+        {"Adamant Armor", "equipment", 0, 10, 0, 0, -5, 1, 3000},
+        {"Master Robe", "equipment", 0, 0, 5, 0, 5, 1, 3000},
+        {"Adamant Sword", "equipment", 10, 0, 0, 0, -1, 1, 3000},
+        {"Master Staff", "equipment", 0, 0, 10, 0, 0, 1, 3000},
+        {"Rune Armor", "equipment", 0, 10, 0, 0, -5, 1, 6000},
+        {"Mystic Robe", "equipment", 0, 0, 5, 0, 5, 1, 6000},
+        {"Rune Sword", "equipment", 10, 0, 0, 0, -1, 1, 6000},
+        {"Mystic Staff", "equipment", 0, 0, 10, 0, 0, 1, 6000},
 };
-
+//boss 300wis 300atk 200def 250sta 150vit
+//max hp 5000
 void printShopItems(item inv[]) {
     for (int i = 0; i < shopListMax; i++) {
         std::cout << "[" << i+1 << "] " << inv[i].name << ": $" << inv[i].price << " {";

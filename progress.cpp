@@ -3,10 +3,13 @@
 #include "battle_system.h"
 #include "shop.h"
 #include "casino.h"
+#include "events.h"
+#include "random.h"
 #include <iostream>
 
 void main_story(character_stats *p) {
 	int time = 8;
+    int randomeventdecider = randomizer(10);
 	std::string user_option;
 	std::cout << "\033[2J\033[1;1H"; // Clear the screen and allow the lines to be printed on top
 
@@ -21,12 +24,20 @@ void main_story(character_stats *p) {
 		std::cout << "6. Return to main menu" << std::endl;
 		std::cin >> user_option;
 		if (user_option == "1") {
+            if (randomeventdecider >= 9) {
+              events(p);
+              randomeventdecider = -1;
+            }
 			training(p);
 			std::cout << "\033[2J\033[1;1H";
 		}
 		else if (user_option == "2") {
-			battle_system(p);
-			//casino_menu(p);
+            if (randomeventdecider >= 9) {
+              events(p);
+              randomeventdecider = -1;
+            }
+			casino_menu(p);
+			//battle_system(p);
 		}
 		else if (user_option == "3") {
 			p->display_stat();
@@ -35,6 +46,10 @@ void main_story(character_stats *p) {
 			std::cout << std::endl;
 		}
 		else if (user_option == "4") {
+            if (randomeventdecider >= 9) {
+              events(p);
+              randomeventdecider = -1;
+            }
             shop(p);
 		}
 		else if (user_option == "5") {
