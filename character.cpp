@@ -194,6 +194,7 @@ bool character_stats::change_equipeed(std::string action, std::string equip_name
 
 bool character_stats::search_equipped(std::string equip_name) {
 	if (std::find(equipped.begin(), equipped.end(), equip_name) != equipped.end()) {
+		// Return true if equipped
 		return true;
 	}
 	else {
@@ -208,4 +209,15 @@ bool character_stats::search_inventory(std::string item_name) {
 	else {
 		return false;
 	}
+}
+// Position = index + 1
+std::string character_stats::search_item_name_in_inventory(int position) {
+	if (position < 1 || position > inventory.size()) {
+		return "";
+	}
+	return inventory[position - 1];
+}
+
+int character_stats::inventory_size() {
+	return inventory.size();
 }

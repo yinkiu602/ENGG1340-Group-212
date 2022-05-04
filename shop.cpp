@@ -2,7 +2,7 @@
 #include "character.h"
 
 const int shopListMax = 20;
-int itemDecider = -999;
+
 
 struct item {
     std::string name;
@@ -57,6 +57,7 @@ void printShopItems(item inv[]) {
 
 
 int shop(character_stats *p) {
+    int itemDecider = -999;
     std::cout << "Welcome to shop! Pick your item!" << std::endl;
     std::cout << "[0] Exit Shop" << std::endl;
     printShopItems(shopInventory);
@@ -64,6 +65,7 @@ int shop(character_stats *p) {
     while (itemDecider != 0) {
         std::cin >> itemDecider;
         if (itemDecider == 0) {
+            std::cout << "\033[2J\033[1;1H"; // Clear the screen and allow the lines to be printed on top
             std::cout << "Come back next time!" << std::endl;
             break;
         }

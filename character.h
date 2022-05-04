@@ -17,6 +17,8 @@ public:
 	bool change_name(std::string input_name);
 	bool search_equipped(std::string equip_name);
 	bool search_inventory(std::string item_name);
+	std::string search_item_name_in_inventory(int position);
+	int inventory_size();
 	int date = 0;
 	int money = 100;
 private:

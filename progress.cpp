@@ -12,10 +12,10 @@ void main_story(character_stats *p) {
     int randomeventdecider = randomizer(10);
 	std::string user_option;
 	std::cout << "\033[2J\033[1;1H"; // Clear the screen and allow the lines to be printed on top
-	std::cout << "Day " << p->date << ". " << "Hi, " << p->read_name() << "! Such a good day today! What do you want to do? (1-6)" << std::endl;
+
 	while (true) {
 //        std::cout << "random value of the day: " << randomeventdecider << std::endl;
-		std::cout << "Date: " << p->date << std::endl;
+		std::cout << "Day " << p->date << ". " << "Hi, " << p->read_name() << "! Such a good day today! What do you want to do? (1-6)" << std::endl;
 		std::cout << "1. Train yourself" << std::endl;
 		std::cout << "2. Feeling lucky, go casino" << std::endl;
 		std::cout << "3. Check my character" << std::endl;
@@ -23,6 +23,10 @@ void main_story(character_stats *p) {
 		std::cout << "5. End your day and have a good sleep." << std::endl;
 		std::cout << "6. Return to main menu" << std::endl;
 		std::cin >> user_option;
+		if (p->date == 20) {
+			std::cout << "It's time to fight the boss. Be prepared for it!" << std::endl;
+			battle_system(p, "boss");
+		}
 		if (user_option == "1") {
             if (randomeventdecider >= 6) {
               events(p);
@@ -32,8 +36,8 @@ void main_story(character_stats *p) {
 			std::cout << "\033[2J\033[1;1H";
 		}
 		else if (user_option == "2") {
-			battle_system(p, "");
-			//casino_menu(p);
+			//battle_system(p, "");
+			casino_menu(p);
 		}
 		else if (user_option == "3") {
 			p->display_stat();

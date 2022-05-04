@@ -54,6 +54,10 @@ void save(character_stats &p) {
 	output_stream << p.read_name() << std::endl;
 	output_stream << p.date << std::endl;
 	output_stream << p.money << std::endl;
+	output_stream << p.inventory_size() << std::endl;
+	for (int i = 0; i < p.inventory_size(); i++) {
+		output_stream << p.search_item_name_in_inventory(i + 1) << std::endl;
+	}
 	output_stream.close();
 }
 
@@ -81,6 +85,12 @@ void load(character_stats &p) {
 			p.date = stoi(value);
 			std::getline(input_stream, value);
 			p.money = stoi(value);
+			std::getline(input_stream, value);
+			int inventory_size = stoi(value);
+			for (int i = 0; i < inventory_size; i++) {
+				std::getline(input_stream, value);
+				p.change_inventory("add", -1, value);
+			}
 			input_stream.close();
 		}
 		std::cout << std::endl;
