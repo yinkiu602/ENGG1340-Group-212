@@ -205,11 +205,11 @@ bool battle_system(character_stats* p, std::string enemy_name) {
 		}
 		if (user_input == 1) {
 			attack_damage_calculation = p->read_specific_stat("ATK") - to_fight.def;
-			if (attack_damage_calculation <= 0) { attack_damage_calculation = 0; }
+			if (attack_damage_calculation <= 0) { attack_damage_calculation = (int)p->read_specific_stat("ATK") * 0.2; }
 			to_fight.hp -= attack_damage_calculation;
 			std::cout << "You attacked the emeny for " << attack_damage_calculation << " HP!" << std::endl;
 			receive_damage_calculation = to_fight.atk - p->read_specific_stat("DEF");
-			if (receive_damage_calculation <= 0) { receive_damage_calculation = 0; }
+			if (receive_damage_calculation <= 0) { receive_damage_calculation = to_fight.atk * 0.2; }
 			std::cout << "The emeny attacked you for " << receive_damage_calculation << " HP!" << std::endl;
 			p->change_stat("HP", -receive_damage_calculation);
 			if (p->read_specific_stat("HP") <= 0 || to_fight.hp <= 0) { ended = true; }
