@@ -189,6 +189,7 @@ bool character_stats::change_equipeed(std::string action, std::string equip_name
 			equipped.erase(position);
 			return true;
 		}
+		return false;
 	}
 }
 
@@ -219,5 +220,5 @@ std::string character_stats::search_item_name_in_inventory(int position) {
 }
 
 int character_stats::inventory_size() {
-	return inventory.size();
+	return (int)inventory.size();
 }

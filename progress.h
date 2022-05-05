@@ -3,7 +3,7 @@
 
 #include "character.h"
 
-void main_story(character_stats *p);
+bool main_story(character_stats *p);
 
 
 #endif

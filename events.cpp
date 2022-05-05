@@ -2,7 +2,7 @@
 #include <random>
 #include "character.h"
 #include "random.h"
-#include "battle_system.h"
+
 std::random_device randomiser;
 std::mt19937 generator(randomiser());
 std::uniform_int_distribution<> range(0, 3);

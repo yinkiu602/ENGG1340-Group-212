@@ -115,20 +115,6 @@ void message_box() {
 	std::cout << std::endl;
 }
 
-bool damage_calculation(character_stats* p, std::string entity_type, std::string stat_name, int hp) {
-	if (entity_type == "boss") {
-
-	}
-	else {
-		p->change_stat(stat_name, hp);
-		if (p->read_specific_stat("HP") <= 0) {
-			return false;
-		}
-	}
-
-
-
-}
 bool battle_system(character_stats* p, std::string enemy_name) {
 	charhp = p->read_specific_stat("HP");
 	charmp = p->read_specific_stat("MP");
@@ -177,10 +163,12 @@ bool battle_system(character_stats* p, std::string enemy_name) {
 		if (user_input == 1) {
 			attack_damage_calculation = p->read_specific_stat("ATK") - to_fight.def;
 			if (attack_damage_calculation <= 0) { attack_damage_calculation = 0; }
+			to_fight.hp -= attack_damage_calculation;
 			std::cout << "You attacked the emeny for " << attack_damage_calculation << " HP!" << std::endl;
 			receive_damage_calculation = to_fight.atk - p->read_specific_stat("DEF");
 			if (receive_damage_calculation <= 0) { receive_damage_calculation = 0; }
 			std::cout << "The emeny attacked you for " << receive_damage_calculation << " HP!" << std::endl;
+			p->change_stat("HP", -receive_damage_calculation);
 			if (p->read_specific_stat("HP") <= 0 || to_fight.hp <= 0) { ended = true; }
 		}
 		else if (user_input == 2) {
@@ -188,6 +176,7 @@ bool battle_system(character_stats* p, std::string enemy_name) {
 			if (receive_damage_calculation <= 0) { receive_damage_calculation = 0; }
 			std::cout << "You move yourself into defend position." << std::endl;
 			std::cout << "The emeny attacked you for " << receive_damage_calculation << " HP!" << std::endl;
+			p->change_stat("HP", -receive_damage_calculation);
 			if (p->read_specific_stat("HP") <= 0 || to_fight.hp <= 0) { ended = true; }
 		}
 		else {
@@ -227,7 +216,6 @@ bool battle_system(character_stats* p, std::string enemy_name) {
 
 			}
 		}
-
 	}
 	return true;
 }
