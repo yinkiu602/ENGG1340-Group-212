@@ -222,3 +222,14 @@ std::string character_stats::search_item_name_in_inventory(int position) {
 int character_stats::inventory_size() {
 	return (int)inventory.size();
 }
+
+std::string character_stats::search_item_name_in_equipped(int position) {
+	if (position < 1 || position > inventory.size()) {
+		return "";
+	}
+	return inventory[position - 1];
+}
+
+int character_stats::equipped_size() {
+	return (int)equipped.size();
+}

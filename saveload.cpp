@@ -58,6 +58,10 @@ void save(character_stats &p) {
 	for (int i = 0; i < p.inventory_size(); i++) {
 		output_stream << p.search_item_name_in_inventory(i + 1) << std::endl;
 	}
+	output_stream << p.equipped_size() << std::endl;
+	for (int i = 0; i < p.equipped_size(); i++) {
+		output_stream << p.search_item_name_in_equipped(i + 1) << std::endl;
+	}
 	output_stream.close();
 }
 
@@ -90,6 +94,12 @@ void load(character_stats &p) {
 			for (int i = 0; i < inventory_size; i++) {
 				std::getline(input_stream, value);
 				p.change_inventory("add", -1, value);
+			}
+			std::getline(input_stream, value);
+			int equipped_size = stoi(value);
+			for (int i = 0; i < equipped_size; i++) {
+				std::getline(input_stream, value);
+				p.change_inventory("equip", value);
 			}
 			input_stream.close();
 		}
