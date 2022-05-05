@@ -99,7 +99,7 @@ void load(character_stats &p) {
 			int equipped_size = stoi(value);
 			for (int i = 0; i < equipped_size; i++) {
 				std::getline(input_stream, value);
-				p.change_inventory("equip", value);
+				p.change_equipeed("equip", value);
 			}
 			input_stream.close();
 		}
