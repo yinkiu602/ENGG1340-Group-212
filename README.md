@@ -21,9 +21,8 @@ A RPG text-based console game
 ## Features
 
 - [X]  Randomly generated initial stats
-- [ ]  Random events in mid-game
+- [X]  Random events in mid-game
 - [X]  Save and load game progress locally
-- [ ]  Locally saved scoreboard
 - [X]  3 difficulty level
 
 

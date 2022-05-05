@@ -8,7 +8,9 @@
 int main() {
 	character_stats character;
 	std::string user_input;
+	bool finish_state = false;
 	while (true) {
+		if (finish_state == true) { break; }
 		std::cout << "\033[2J\033[1;1H"; // Clear the screen and allow the lines to be printed on top
 		std::cout << "Welcome to Realms and Might. \nType \"s\" if you want to save the game at any time.\nType \"l\" if you want to load the game.\nType \"n\" to start a new game.\nType \"c\" to continue (if you loaded the save file).\nType \"e\" to exit." << std::endl;
 		std::cin >> user_input;
@@ -33,15 +35,23 @@ int main() {
 				std::cout << "Character not loaded! If you just opened the game, press \"l\" to load the charater first." << std::endl;
 			}
 			else {
-				main_story(&character);
+				if (!finish_state) {
+					finish_state = main_story(&character);
+				}
 			}
 		}
 		else {
 			character.initialize();
 			character.display_stat();
 			std::cout << "Done" << std::endl;
-			main_story(&character);
+			finish_state = main_story(&character);
 		}
+	}
+	if (character.read_specific_stat("HP") <= 0) {
+		std::cout << "Sadly you were killed. Try harder next time" << std::endl;
+	}
+	else {
+		std::cout << "Congratulations, you have killed the boss. Try a different difficulty if you want to challenge yourself!" << std::endl;
 	}
 	return 0;
 }

@@ -7,7 +7,7 @@
 #include "random.h"
 #include <iostream>
 
-void main_story(character_stats *p) {
+bool main_story(character_stats *p) {
 	int time = 8;
     int randomeventdecider = randomizer(10);
 	std::string user_option;
@@ -26,6 +26,8 @@ void main_story(character_stats *p) {
 		if (p->date == 20) {
 			std::cout << "It's time to fight the boss. Be prepared for it!" << std::endl;
 			battle_system(p, "boss");
+			// Player or boss dead
+			return true;
 		}
 		if (user_option == "1") {
             if (randomeventdecider >= 6) {
@@ -58,7 +60,7 @@ void main_story(character_stats *p) {
 			p->change_stat("STA", p->read_specific_stat("STA_MAX"), true);
 		}
 		else if (user_option == "6") {
-			break;
+			return false;
 		}
 		else {
 			std::cout << "Sorry. I don't get what you mean. Please input again." << std::endl;
