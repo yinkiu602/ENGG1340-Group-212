@@ -5,7 +5,6 @@
 #include "random.h"
 #include <iostream>
 #include <iomanip>
-#include <string>
 
 struct enemy {
 	int hp, mp, atk, def, wis, vit;
@@ -30,25 +29,69 @@ std::string hp_bar(int hp, int hp_max, int width = 13) {
 	return (std::string((width * hp / hp_max), '+') + std::string((width - width * hp / hp_max), '-'));
 }
 
+std::string message_generation(std::string message_type, character_stats * p) {
+	int width = 15;
+	std::string output_message, message_content;
+	if (message_type == "name") {
+		int name_length = p->read_name().length();
+		if (name_length > 15) {
+			message_content = "Player";
+		}
+		else {
+			message_content = p->read_name();
+		}
 
-void print_entites(std::string type) {
+	}
+	else if (message_type == "player_hp") {
+		int hp_length = std::to_string(p->read_specific_stat("HP")).length() + std::to_string(p->read_specific_stat("HP_MAX")).length();
+		if (hp_length > 8) {
+			message_content = "HP:" + std::to_string(p->read_specific_stat("HP")) + "/" + std::to_string(p->read_specific_stat("HP_MAX"));
+		}
+		else {
+			message_content = "HP: " + std::to_string(p->read_specific_stat("HP")) + " / " + std::to_string(p->read_specific_stat("HP_MAX"));
+		}
+	}
+	else {
+		int hp_length = std::to_string(to_fight.hp).length() + std::to_string(emeny_max_hp).length();
+		if (hp_length > 8) {
+			message_content = "HP:" + std::to_string(to_fight.hp) + "/" + std::to_string(emeny_max_hp);
+		}
+		else {
+			message_content = "HP: " + std::to_string(to_fight.hp) + " / " + std::to_string(emeny_max_hp);
+		}
+	}
+	output_message = "/";
+	if (message_content.length() % 2 == 0) { output_message += " "; }
+	for (int i = 0; i < ((15 - message_content.length()) / 2); i++) {
+		output_message += " ";
+	}
+	output_message += message_content;
+	for (int i = 0; i < ((15 - message_content.length()) / 2); i++) {
+		output_message += " ";
+	}
+	output_message += "/";
+
+	return output_message;
+}
+
+
+void print_entites(std::string type, character_stats* p) {
 	if (type == "boss") {
 		// Change from 90 to windows_width() when compile on linux
 		std::cout << std::setw(windows_width()) << std::right << "*****************" << std::endl;
 		std::cout << std::setw(windows_width()) << std::right << "/     ENEMY     /" << std::endl;
 		std::cout << std::setw(windows_width()) << std::right << "/               /" << std::endl;
-		std::cout << std::setw(windows_width()) << std::right << "/  HP: 50 / 50  /" << std::endl;
-		//std::cout << std::setw(windows_width()) << std::right << "/HP: " << to_fight.hp << " / " << emeny_max_hp << " /" << std::endl;
+		std::cout << std::setw(windows_width()) << std::right << message_generation("", p) << std::endl;
 		std::cout << std::setw(windows_width()) << std::right << "/ " + hp_bar(to_fight.hp, emeny_max_hp) + " /" << std::endl;
 		std::cout << std::setw(windows_width()) << std::right << "/               /" << std::endl;
 		std::cout << std::setw(windows_width()) << std::right << "*****************" << std::endl;
 	}
 	if (type == "player") {
 		std::cout << "*****************" << std::endl;
-		std::cout << "/     User1     /" << std::endl;
+		std::cout << message_generation("name", p) << std::endl;
 		std::cout << "/               /" << std::endl;
-		std::cout << "/  HP: 50 / 50  /" << std::endl;
-		std::cout << "/ " + hp_bar(13, 50) + " /" << std::endl;
+		std::cout << message_generation("player_hp", p) << std::endl;
+		std::cout << "/ " + hp_bar(p->read_specific_stat("HP"), p->read_specific_stat("HP_MAX")) + " /" << std::endl;
 		std::cout << "/               /" << std::endl;
 		std::cout << "*****************" << std::endl;
 	}
@@ -144,9 +187,9 @@ bool battle_system(character_stats* p, std::string enemy_name) {
 	int user_input;
 	std::cout << "\033[2J\033[1;1H"; // Clear the screen and allow the lines to be printed on top
 	while (!ended) {
-		print_entites("boss");
+		print_entites("boss", p);
 		std::cout << std::endl << std::endl << std::endl;
-		print_entites("player");
+		print_entites("player", p);
 		message_box();
 		while (true) {
 			std::cout << "Please indicate your next action: ";

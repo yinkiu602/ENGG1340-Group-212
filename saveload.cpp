@@ -86,17 +86,17 @@ void load(character_stats &p) {
 			std::getline(input_stream, value);
 			p.change_name(value);
 			std::getline(input_stream, value);
-			p.date = stoi(value);
+			p.date = std::stoi(value);
 			std::getline(input_stream, value);
-			p.money = stoi(value);
+			p.money = std::stoi(value);
 			std::getline(input_stream, value);
-			int inventory_size = stoi(value);
+			int inventory_size = std::stoi(value);
 			for (int i = 0; i < inventory_size; i++) {
 				std::getline(input_stream, value);
 				p.change_inventory("add", -1, value);
 			}
 			std::getline(input_stream, value);
-			int equipped_size = stoi(value);
+			int equipped_size = std::stoi(value);
 			for (int i = 0; i < equipped_size; i++) {
 				std::getline(input_stream, value);
 				p.change_equipeed("equip", value);
