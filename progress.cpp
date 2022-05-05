@@ -14,7 +14,7 @@ void main_story(character_stats *p) {
 	std::cout << "\033[2J\033[1;1H"; // Clear the screen and allow the lines to be printed on top
 
 	while (true) {
-//        std::cout << "random value of the day: " << randomeventdecider << std::endl;
+        std::cout << "random value of the day: " << randomeventdecider << std::endl;
 		std::cout << "Day " << p->date << ". " << "Hi, " << p->read_name() << "! Such a good day today! What do you want to do? (1-6)" << std::endl;
 		std::cout << "1. Train yourself" << std::endl;
 		std::cout << "2. Feeling lucky, go casino" << std::endl;
@@ -37,6 +37,10 @@ void main_story(character_stats *p) {
 		}
 		else if (user_option == "2") {
 			//battle_system(p, "");
+          if (randomeventdecider >= 6) {
+            events(p);
+            randomeventdecider = -1;
+          }
 			casino_menu(p);
 		}
 		else if (user_option == "3") {

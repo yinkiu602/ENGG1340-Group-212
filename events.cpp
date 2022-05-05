@@ -2,7 +2,7 @@
 #include <random>
 #include "character.h"
 #include "random.h"
-
+#include "battle_system.h"
 std::random_device randomiser;
 std::mt19937 generator(randomiser());
 std::uniform_int_distribution<> range(0, 3);
@@ -21,6 +21,18 @@ item legendaryItem[4] {
     {"Ghrazi Rapier", "equipment", 150, 0, 0, 10, 5, 1, 10000},
     {"Justiciar Armor", "equipment", 0, 250, 0, 5, -20, 1, 10000},
 };
+
+void bloodMoon(character_stats *p) {
+  int enemiesCount = randomizer(5);
+  std::cout << "As you walk down the streets, the sky turns into a dark red color." << std::endl;
+  std::cout << "You hear growls near you, looks like you are in deep trouble as bloodmoon crawls in..." << std::endl;
+  for (int i = 0; i < enemiesCount; i++) {
+    battle_system(p, "small");
+  }
+  std::cout << "This one looks stronger than the others, this is probably the final of them." << std::endl;
+  battle_system(p, "big");
+  std::cout << "You survived this bloodmoon, but you know that they will come back stronger..." << std::endl;
+}
 
 void mysteriousMan(character_stats *p) {
   std::cout << "Hello stranger, I have some goodies here, would you want to take a look?" << std::endl;
@@ -88,8 +100,11 @@ void beggar(character_stats *p) {
 }
 
 void events(character_stats *p) {
-  int decider = randomizer(10);
-  if (decider >= 8) {
+  int decider = randomizer(11);
+  if (decider == 10) {
+    bloodMoon(p);
+  }
+  else if (decider >= 8) {
     mysteriousMan(p);
   }
   else beggar(p);

@@ -3,7 +3,7 @@ FLAGS = -pedantic-errors -std=c++11
 
 #structure.o: structure.h
 #	g++ -pedantic-errors -std=c++11 -c structure.o
-events.o: events.cpp events.h character.h random.h
+events.o: events.cpp events.h character.h random.h battle_system.h
 	g++ $(FLAGS) -c $<
 random.o: random.cpp random.h
 	g++ $(FLAGS) -c $<
@@ -13,7 +13,7 @@ saveload.o: saveload.cpp saveload.h character.h
 	g++ $(FLAGS) -c $<
 training.o: training.cpp training.h character.h random.h
 	g++ $(FLAGS) -c $<
-battle_system.o: battle_system.cpp battle_system.h character.h
+battle_system.o: battle_system.cpp battle_system.h character.h random.h item.h
 	g++ $(FLAGS) -c $<
 shop.o: shop.cpp shop.h character.h
 	g++ $(FLAGS) -c $<

@@ -1,7 +1,7 @@
 #include <iostream>
 #include "character.h"
 
-const int shopListMax = 20;
+const int shopListMax = 18;
 
 
 struct item {
@@ -29,6 +29,8 @@ item shopInventory[shopListMax] = {
         {"Mystic Robe", "equipment", 0, 0, 5, 0, 5, 1, 6000},
         {"Rune Sword", "equipment", 10, 0, 0, 0, -1, 1, 6000},
         {"Mystic Staff", "equipment", 0, 0, 10, 0, 0, 1, 6000},
+        {"Health Potion (Restores 25% health)", "consumable", 0, 0, 0, 0, 0, 5, 250},
+        {"Mage Potion (Restores 25% mp)", "consumable", 0, 0, 0, 0, 0, 5, 250}
 };
 //boss 300wis 300atk 200def 250sta 150vit
 //max hp 5000
