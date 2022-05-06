@@ -91,7 +91,7 @@ bool houseMove() {
         printHouseHand(houseCard);
         houseCardCounter++;
     }
-    if (houseSum < 21) {
+    if (houseSum <= 21) {
         return true;
     }
     else return false;
@@ -138,6 +138,10 @@ bool blackjack(character_stats* p) {
                 randomint = randomizer(13);
                 playerCard[playerCardCounter] = cards[randomint].name;
                 playerSum += cards[randomint].value;
+                if (playerSum > 21) {
+                  std::cout << "You busted!" << std::endl << "You have lost " << blackjack_bet << " credits" << std::endl;
+                  return 0;
+                }
                 printPlayerHand(playerCard);
                 playerCardCounter++;
                 break;
