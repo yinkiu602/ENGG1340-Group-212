@@ -4,11 +4,12 @@
 #include <iostream>
 #include <algorithm>
 
-
+// Initialize the new character
 void character_stats::initialize() {
 	while (true) {
 		std::cout << "What difficulty you want? 1 is the easiest. 2 is the middle. 3 is the hardest." << std::endl;
 		std::cin >> difficulty;
+		// Check user input
 		if (std::cin.fail() || difficulty < 1 || difficulty > 3) {
 			std::cin.clear();
 			std::cin.ignore(10000, '\n');
@@ -17,7 +18,7 @@ void character_stats::initialize() {
 		}
 		break;
 	}
-
+	// Different stats depending on user difficulty choice
 	if (difficulty == 1) {
 		hp = 50;
 		hp_max = hp;
@@ -49,8 +50,10 @@ void character_stats::initialize() {
 		vit = randomizer(5);
 	}
 	stamina = 100;
+	// Get user name
 	std::cout << "What would you name your hero?" << std::endl;
 	std::cin.ignore();
+	// Use getline() to prevent name with space
 	std::getline(std::cin, name);
 	while (name == "") {
 		std::cout << "Character name cannot be empty! Please enter a name." << std::endl;
@@ -60,23 +63,26 @@ void character_stats::initialize() {
 	std::cout << "Welcome! " << name << std::endl;
 }
 
+// Print all the stats of the character
 void character_stats::display_stat() {
 	std::cout << "HP: " << hp << "/" << hp_max << " MP: " << mp << "/" << mp_max << " ATK: " << atk << " DEF: " << def << " WIS: " << wis << " VIT: " << vit << " STA: " << stamina << "/" << sta_max << std::endl;
 }
 
+// Print all items in character inventory. e.g.: 1. Iron Armor 2. Iron Sword
 void character_stats::display_inventory() {
 	for (int i = 0; i < inventory.size(); i++) {
 		std::cout << (i + 1) << ": " << inventory[i] << " ";
 	}
 	std::cout << std::endl;
 }
-
+// Return all the stats of character in 1 string
 std::string character_stats::read_stat() {
 	std::string return_message;
 	return_message = "HP " + std::to_string(hp) + " MP " + std::to_string(mp) + " ATK " + std::to_string(atk) + " DEF " + std::to_string(def) + " WIS " + std::to_string(wis) + " VIT " + std::to_string(vit) + " STA " + std::to_string(stamina) + " HP_MAX " + std::to_string(hp_max) + " MP_MAX " + std::to_string(mp_max) + +" STA_MAX " + std::to_string(sta_max);
 	return return_message;
 }
 
+// Return the value of a specific stats of character
 int character_stats::read_specific_stat(std::string stat_name) {
 	if (stat_name == "HP") {
 		return hp;
@@ -109,10 +115,14 @@ int character_stats::read_specific_stat(std::string stat_name) {
 		return sta_max;
 	}
 }
+
+// Return character name
 std::string character_stats::read_name() {
 	return name;
 }
 
+// Change character specific stat.
+// abs is used to check if we need to directly change to specific value
 bool character_stats::change_stat(std::string stat_name, int delta, bool abs) {
 	if (stat_name == "HP") {
 		(abs == false) ? (hp += delta) : (hp = delta);
@@ -159,6 +169,9 @@ bool character_stats::change_stat(std::string stat_name, int delta, bool abs) {
 	}
 }
 
+// Add or remove item with item_name in inventory.
+// Position only needed when removing item
+// item_name only needed when adding item
 bool character_stats::change_inventory(std::string action, int position, std::string item_name) {
 	if (action == "add") {
 		inventory.push_back(item_name);
@@ -173,17 +186,22 @@ bool character_stats::change_inventory(std::string action, int position, std::st
 	}
 }
 
+// Change character name.
 bool character_stats::change_name(std::string input_name) {
 	name = input_name;
 	return true;
 }
 
+// Change the equipped items of character
 bool character_stats::change_equipeed(std::string action, std::string equip_name) {
+	// If action == "equip", add it to the vector tracking all equipped item
 	if (action == "equip") {
 		equipped.push_back(equip_name);
 		return true;
 	}
 	else {
+		// Unequip
+		// Find the equipped item in vector and remove it
 		std::vector<std::string>::iterator position = std::find(equipped.begin(), equipped.end(), equip_name);
 		if (position != equipped.end()) {
 			equipped.erase(position);
@@ -193,6 +211,7 @@ bool character_stats::change_equipeed(std::string action, std::string equip_name
 	}
 }
 
+// Search and check if the item is equipped
 bool character_stats::search_equipped(std::string equip_name) {
 	if (std::find(equipped.begin(), equipped.end(), equip_name) != equipped.end()) {
 		// Return true if equipped
@@ -203,6 +222,7 @@ bool character_stats::search_equipped(std::string equip_name) {
 	}
 }
 
+// Search and check if the item is in inventory
 bool character_stats::search_inventory(std::string item_name) {
 	if (std::find(inventory.begin(), inventory.end(), item_name) != inventory.end()) {
 		return true;
@@ -211,6 +231,8 @@ bool character_stats::search_inventory(std::string item_name) {
 		return false;
 	}
 }
+
+// Search the name of specific item in inventory
 // Position = index + 1
 std::string character_stats::search_item_name_in_inventory(int position) {
 	if (position < 1 || position > inventory.size()) {
@@ -219,10 +241,13 @@ std::string character_stats::search_item_name_in_inventory(int position) {
 	return inventory[position - 1];
 }
 
+// Return the number of inventory items
 int character_stats::inventory_size() {
 	return (int)inventory.size();
 }
 
+// Search the name of specific item in equipped
+// Position = index + 1
 std::string character_stats::search_item_name_in_equipped(int position) {
 	if (position < 1 || position > inventory.size()) {
 		return "";
@@ -230,6 +255,7 @@ std::string character_stats::search_item_name_in_equipped(int position) {
 	return inventory[position - 1];
 }
 
+// Return the number of equipped items
 int character_stats::equipped_size() {
 	return (int)equipped.size();
 }

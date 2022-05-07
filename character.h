@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+
 class character_stats {
 public:
 	void initialize();
@@ -21,16 +22,14 @@ public:
 	std::string search_item_name_in_equipped(int position);
 	int inventory_size();
 	int equipped_size();
-	int date = 0;
-	int money = 100;
+	int date = 0;		// Date of the game progress
+	int money = 100;	// Money of character. Initial amount = 100 for all difficulty
 private:
-	int hp, mp, atk, def, wis, vit, stamina, difficulty;
-	int hp_max, mp_max, sta_max = 100;
-	std::string name = "";
-	std::vector<std::string> inventory;
-	std::vector<std::string> equipped;
+	int hp, mp, atk, def, wis, vit, stamina, difficulty; // Variable to store different stats for character and different
+	int hp_max, mp_max, sta_max = 100;					 // Store the max value of character.
+	std::string name = "";								 // Name of character
+	std::vector<std::string> inventory;					 // Vector to store inventory item
+	std::vector<std::string> equipped;					 // Vector to store equipped item
 };
-
-
 
 #endif

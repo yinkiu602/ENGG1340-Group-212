@@ -9,8 +9,10 @@ int randomizer(int mod) {
 		random_value = (unsigned int)time(NULL);
 		srand(random_value);
 	}
+	// We don't want to do % 0. Cahgne to 1 if mod == 0
 	if (mod == 0) { mod = 1; }
 	int result = rand() % mod;
+	// Min value == 1 for output
 	if (result == 0) { result = 1; }
 	return result;
 }

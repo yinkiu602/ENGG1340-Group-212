@@ -8,6 +8,7 @@ void casino_menu(character_stats* p) {
 	while (true) {
 		std::cout << "\033[2J\033[1;1H"; // Clear the screen and allow the lines to be printed on top
 		int user_input = -1;
+		// Print menu for 2 casino game.
 		while (true) {
 			std::cout << "Welcome to the casino! Wants to try out your luck today?" << std::endl;
 			std::cout << "Blackjack and Hi Lo are current open!" << std::endl;
@@ -16,12 +17,14 @@ void casino_menu(character_stats* p) {
 			std::cout << "To exit the casino. Enter (3)!" << std::endl;
 			std::cout << "Please enter a number: ";
 			std::cin >> user_input;
+			// Loop until user_input is correct
 			if (std::cin.fail() || user_input < 1 || user_input >3) {
 				std::cin.clear();
 				std::cin.ignore(10000, '\n');
 				std::cout << "Input not recognized. Please enter a number only!" << std::endl << std::endl;
 				continue;
 			}
+			// Break the infinite loop if user_input is correct
 			break;
 		}
 		if (user_input == 1) {
@@ -31,6 +34,7 @@ void casino_menu(character_stats* p) {
 			high_low(p);
 		}
 		else {
+			std::cout << "\033[2J\033[1;1H"; // Clear the screen and allow the lines to be printed on top
 			break;
 		}
 	}

@@ -9,5 +9,4 @@
 
 void events(character_stats *p);
 
-
 #endif

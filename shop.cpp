@@ -60,11 +60,12 @@ void printShopItems(item inv[]) {
 
 int shop(character_stats *p) {
     int itemDecider = -999;
+    std::cout << "\033[2J\033[1;1H";
     std::cout << "Welcome to shop! Pick your item!" << std::endl;
-    std::cout << "[0] Exit Shop" << std::endl;
-    printShopItems(shopInventory);
-    std::cout << "Which one would you Like? You currently have $" << p->money << "." << std::endl;
     while (itemDecider != 0) {
+        std::cout << "[0] Exit Shop" << std::endl;
+        printShopItems(shopInventory);
+        std::cout << "Which one would you Like? You currently have $" << p->money << "." << std::endl;
         std::cin >> itemDecider;
         if (itemDecider == 0) {
             std::cout << "\033[2J\033[1;1H"; // Clear the screen and allow the lines to be printed on top
@@ -87,8 +88,6 @@ int shop(character_stats *p) {
             std::cout << "Which one would you Like? You currently have $" << p->money << "." << std::endl;
             continue;
         };
-        printShopItems(shopInventory);
-        std::cout << "Which one would you Like? You currently have $" << p->money << "." << std::endl;
     }
     return 0;
 }

@@ -10,7 +10,7 @@ A RPG text-based console game
 - Event will happen randomly that may help or negatively impact in-game progress
 - Ranomly generated inital stats to add uniqueness.
 - 3 difficulty level with different initial stats.
-- Auto save after the completition of one in-game day.
+- Casino for players to test their luck
 
 ## Authors
 
@@ -24,23 +24,28 @@ A RPG text-based console game
 - [X]  Random events in mid-game
 - [X]  Save and load game progress locally
 - [X]  3 difficulty level
+- [X]  Dynamic width for battle system message.
 
 
 
 ## Code Requirment
 - [X]  Generation of random game sets or events                 --> Use of rand() to generate initial stats and events. (Feature 1&2)
-- [X]  Data structures for storing game status                  --> Use of struct to create and store user stats. (Feature 1&4)
-- [X]  Dynamic memory management                                --> Use of pointer to dynamicly allocate memory. (Example: Dynamic sized array for inventory tracking. Array deletion when random event is finished. delete[])
-- [X]  File input/output (e.g., for loading/saving game status) --> Use of fileio to save and reload game progress and scoreboard. (Feature 3&4)
+- [X]  Data structures for storing game status                  --> Use of class/ struct to create and store user stats. (Feature 1&4)
+- [X]  Dynamic memory management                                --> Use of vector to dynamically allocate memory.
+- [X]  File input/output (e.g., for loading/saving game status) --> Use of fileio to save and reload game progress. (Feature 3&4)
 - [X]  Program codes in multiple files
-- [ ]  Proper indentation and naming styles
-- [ ]  In-code documentation
+- [X]  Proper indentation and naming styles
+- [X]  In-code documentation
 
-## Installation environment (TODO) 
+## Installation environment
 
-Compile the program with any C++ compiler
-(g++ in linux / Mingw-w64 in Windows)
+Compile the program with any C++ compiler (Parts of the code need to be changed when not compiling in linux)
+(g++ in linux)
 
 ```bash
-  make main
+  make clean; make main
 ```
+## Save-loading
+
+Game progress will be saved in current working directory. No need to type the extension when loading / saving.
+Sample save file provided with name "testsave"

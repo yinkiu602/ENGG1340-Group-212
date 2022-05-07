@@ -5,5 +5,4 @@
 
 bool main_story(character_stats *p);
 
-
 #endif
