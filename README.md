@@ -27,7 +27,8 @@ Player can try out their luck and skills by fighting the ultimate boss.
 - [X]  3 difficulty level
 - [X]  Dynamic width for battle system message.
 
-
+## Non standard library list
+- #include <sys/ioctl.h> --> Used in battle_system.cpp to get the windows size to allow message width be dynamicly change depends on console width.
 
 ## Code Requirment
 - [X]  Generation of random game sets or events                 --> Use of rand() to generate initial stats and events. (Feature 1&2)
