@@ -85,7 +85,7 @@ void beggar(character_stats* p) { // beggar event where if player decides to giv
     std::cout << "[0] Quit" << std::endl << "[1] Give him $100" << std::endl;
     int beggarDecider; // stores the decision of player
     std::cin >> beggarDecider;
-    while ((beggarDecider != 0) || (beggarDecider != 1)) {
+    while ((beggarDecider != 0) || (beggarDecider != 1)) { // player deciding whether or not to give the beggar money
         if (beggarDecider == 0) {
             std::cout << "You did not give him anything." << std::endl;
             break;

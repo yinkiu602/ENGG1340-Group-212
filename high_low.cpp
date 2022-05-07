@@ -26,7 +26,7 @@ const card cards[13] = // array to store a deck of card
     {"K", 13}
 };
 
-card slotCard, pickedCard;
+card slotCard, pickedCard; // store current card and next card
 int hilo_bet; // bet of player
 int winnings; // winnings of player after a bet
 int actionDecider = 0; // stores decision of player

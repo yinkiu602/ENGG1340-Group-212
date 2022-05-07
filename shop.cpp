@@ -3,7 +3,6 @@
 
 const int shopListMax = 18;
 
-
 struct item {
     std::string name;
     std::string type; // distinguish the item by using type variable (equipment/consumable)

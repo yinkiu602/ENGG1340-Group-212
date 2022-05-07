@@ -120,7 +120,7 @@ bool blackjack(character_stats* p) {
             std::cout << "Insufficient money! Enter another amount!" << std::endl;
         }
         p->money -= blackjack_bet;
-        initializeGame();
+        initializeGame(); // calls function to initialize the game
         while (hitStandDecider != 2) { // while loop for blackjack game, loop until player decides to stand, double down or busts
             if (playerSum > 21) {
               std::cout << "You busted!" << std::endl << "You have lost " << blackjack_bet << " credits" << std::endl;
