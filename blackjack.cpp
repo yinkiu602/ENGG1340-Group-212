@@ -30,13 +30,13 @@ std::string playerCard[21] = {}; // stores player's hand of card
 std::string houseCard[21] = {}; // stores house's hand of card
 int playerSum = 0, houseSum = 0; // stores the sum of player's hand of card and house's hand
 
-int hitStandDecider;
-int blackjack_bet;
-int randomint;
-int playerCardCounter = 2, houseCardCounter = 2;
-bool doubleDownAvailability = true;
+int hitStandDecider; // used to decide player's action
+int blackjack_bet; // player's bet on the game
+int randomint; // used to distribute card from the cards array
+int playerCardCounter = 2, houseCardCounter = 2; // store card counts of both player and house
+bool doubleDownAvailability = true; // used to check if the player can still double down or not
 
-void clear_status() {
+void clear_status() { // reset player's and house's status
     for (int i = 0; i < 21; i++) {
         playerCard[i] = "";
         houseCard[i] = "";
@@ -50,7 +50,7 @@ void clear_status() {
     houseCardCounter = 2;
 }
 
-void printPlayerHand(std::string hand[]) {
+void printPlayerHand(std::string hand[]) { // print out player's hand of card when called
     std::cout << "Your hand: ";
     for (int i = 0; i <= playerCardCounter; i++) {
         std::cout << hand[i] << " ";
@@ -58,7 +58,7 @@ void printPlayerHand(std::string hand[]) {
     std::cout << std::endl;
 }
 
-void printHouseHand(std::string hand[]) {
+void printHouseHand(std::string hand[]) { // print out house's hand of card when called
     std::cout << "House's hand: ";
     for (int i = 0; i <= houseCardCounter; i++) {
         std::cout << hand[i] << " ";
@@ -66,7 +66,7 @@ void printHouseHand(std::string hand[]) {
     std::cout << std::endl;
 }
 
-void initializeGame() {
+void initializeGame() { // initialize the game by giving both the house and the player 2 cards
     for (int i = 0; i < 2; i++) {
         randomint = randomizer(13);
         houseCard[i] = cards[randomint].name;
@@ -80,6 +80,8 @@ void initializeGame() {
     std::cout << "Your hand: " << playerCard[0] << " " << playerCard[1] << std::endl;
 }
 
+// decide how the house plays the game, the house will hit until it reaches 17 or more, then it will return true
+// if the house busts during the function, it will return false to let the main function know
 bool houseMove() {
     while (houseSum < 17) {
         if (houseSum > 21) {
@@ -98,6 +100,8 @@ bool houseMove() {
     else return false;
 }
 
+
+// main blackjack function
 bool blackjack(character_stats* p) {
     while (true) {
         std::cout << "\033[2J\033[1;1H"; // Clear the screen and allow the lines to be printed on top
@@ -117,17 +121,17 @@ bool blackjack(character_stats* p) {
         }
         p->money -= blackjack_bet;
         initializeGame();
-        while (hitStandDecider != 2) {
+        while (hitStandDecider != 2) { // while loop for blackjack game, loop until player decides to stand, double down or busts
             if (playerSum > 21) {
               std::cout << "You busted!" << std::endl << "You have lost " << blackjack_bet << " credits" << std::endl;
               return 0;
             }
-            if (doubleDownAvailability) {
+            if (doubleDownAvailability) { // if the player has already hit once, the player won't be able to double down.
               std::cout << "Hit(1)? Stand(2)? Or Double Down(3)?: ";
             }
             else std::cout << "Hit(1)? Stand(2)?: ";
             std::cin >> hitStandDecider;
-            if (hitStandDecider == 1) {
+            if (hitStandDecider == 1) { // hitting a card
                 randomint = randomizer(13);
                 playerCard[playerCardCounter] = cards[randomint].name;
                 playerSum += cards[randomint].value;
@@ -136,7 +140,7 @@ bool blackjack(character_stats* p) {
                 doubleDownAvailability = false;
             }
 
-            else if ((hitStandDecider == 3) && (doubleDownAvailability)) {
+            else if ((hitStandDecider == 3) && (doubleDownAvailability)) { // doubling down and ending the loop
                 p->money -= blackjack_bet;
                 blackjack_bet *= 2;
                 randomint = randomizer(13);
@@ -150,10 +154,10 @@ bool blackjack(character_stats* p) {
                 playerCardCounter++;
                 break;
             }
-            else if (hitStandDecider == 2) break;
+            else if (hitStandDecider == 2) break; // stand
             else std::cout << "Invalid Option!" << std::endl;
         }
-        if (houseMove()) {
+        if (houseMove()) { // if house does not bust, it will proceed to this and see whose sum is higher to decide who wins
             if (playerSum > houseSum) {
                 std::cout << "You win!" << std::endl << "You have won " << blackjack_bet << " credits" << std::endl;
                 p->money += (blackjack_bet * 2);
