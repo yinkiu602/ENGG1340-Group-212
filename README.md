@@ -1,6 +1,7 @@
 # Realms and Might
 
-A RPG text-based console game
+A RPG text-based console game that involve player customization, gambling, and pve system.
+Player can try out their luck and skills by fighting the ultimate boss.
 
 
 ## Game setting
