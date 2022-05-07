@@ -174,6 +174,24 @@ void message_box() {
 	std::cout << std::endl;
 }
 
+// Heal functino. Depends on vit
+void heal(character_stats* p) {
+	// Calculate the amount of hp recover for player
+	int hp_recover = 1 + 0.24 * p->read_specific_stat("VIT");
+	p->change_stat("HP", hp_recover);
+	// Calculate the amount of hp recover for emeny
+	int emeny_recover = (int)(1 + 0.24 * to_fight.vit);
+	if ((emeny_recover + to_fight.hp) > emeny_max_hp) {
+		to_fight.hp = emeny_max_hp;
+	}
+	else {
+		to_fight.hp += emeny_recover;
+	}
+}
+
+
+
+
 bool battle_system(character_stats* p, std::string enemy_name) {
 	// Calculate damage of player and emeny.
 	int attack_damage_calculation, receive_damage_calculation;
@@ -236,7 +254,7 @@ bool battle_system(character_stats* p, std::string enemy_name) {
 		if (user_input == 1) {
 			std::cout << "\033[2J\033[1;1H"; // Clear the screen and allow the lines to be printed on top
 			attack_damage_calculation = p->read_specific_stat("ATK") - to_fight.def;
-			if (attack_damage_calculation <= 0) { attack_damage_calculation = (int)p->read_specific_stat("ATK") * 0.2; }
+			if (attack_damage_calculation <= 0) { attack_damage_calculation = (int) (p->read_specific_stat("ATK") * 0.2); }
 			// Reduce emeny hp base on damage calculated from the formula above.
 			to_fight.hp -= attack_damage_calculation;
 			std::cout << "You attacked the emeny for " << attack_damage_calculation << " HP!" << std::endl;
@@ -247,6 +265,8 @@ bool battle_system(character_stats* p, std::string enemy_name) {
 			p->change_stat("HP", -receive_damage_calculation);
 			// If any side hp <= 0, the game end
 			if (p->read_specific_stat("HP") <= 0 || to_fight.hp <= 0) { ended = true; }
+			// Heal both side depends on vit
+			heal(p);
 		}
 		// Defense position for character.
 		else if (user_input == 2) {
@@ -258,6 +278,8 @@ bool battle_system(character_stats* p, std::string enemy_name) {
 			std::cout << "The emeny attacked you for " << receive_damage_calculation << " HP!" << std::endl;
 			p->change_stat("HP", -receive_damage_calculation);
 			if (p->read_specific_stat("HP") <= 0 || to_fight.hp <= 0) { ended = true; }
+			// Heal both side depends on vit
+			heal(p);
 		}
 		// Use inventory
 		else {
@@ -298,7 +320,7 @@ bool battle_system(character_stats* p, std::string enemy_name) {
 			else {
 				std::cout << "Equipped " << item_name << std::endl;
 				std::cout << "Your original stats: " << p->read_stat() << std::endl;
-				equip(p, "equip", item_name);
+				equip(p, "equip", item_name, user_input);
 				std::cout << "Your new stats:      " << p->read_stat() << std::endl;
 			}
 		}

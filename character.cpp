@@ -125,11 +125,11 @@ std::string character_stats::read_name() {
 // abs is used to check if we need to directly change to specific value
 bool character_stats::change_stat(std::string stat_name, int delta, bool abs) {
 	if (stat_name == "HP") {
-		(abs == false) ? (hp += delta) : (hp = delta);
+		(abs == false) ? ((hp + delta > hp_max) ? (hp = hp_max) : (hp += delta)) : (hp = delta);
 		return true;
 	}
 	else if (stat_name == "MP") {
-		(abs == false) ? (mp += delta) : (mp = delta);
+		(abs == false) ? ((mp + delta > mp_max) ? (mp = mp_max) : (mp += delta)) : (mp = delta);
 		return true;
 	}
 	else if (stat_name == "ATK") {

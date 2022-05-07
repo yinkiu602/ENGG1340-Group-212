@@ -4,6 +4,6 @@
 #include <string>
 #include "character.h"
 
-bool equip(character_stats* p, std::string action, std::string equip_name);
+bool equip(character_stats* p, std::string action, std::string equip_name, int item_index = -1);
 
 #endif

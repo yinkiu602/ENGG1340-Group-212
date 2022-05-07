@@ -3,11 +3,12 @@
 
 #include "character.h"
 
+// Stats struct for storing the values of items
 struct stats {
     int atk, def, wis, vit, sta;
 };
 
-stats test = { 1,1,1,1,1 };
+// Map to convert item name to stats
 std::map<std::string, stats> converter{
     { "Iron Armor"      , {0, 10, 0, 0, -5}},
     { "Apprentice Robe" , {0, 0, 5, 0, 5 }},
@@ -31,11 +32,22 @@ std::map<std::string, stats> converter{
     { "Kodai Wand"      , {0, 0, 175, 15, 0}}
 };
 
-bool equip(character_stats* p, std::string action, std::string equip_name) {
+bool equip(character_stats* p, std::string action, std::string equip_name, int item_index) {
     if (action == "equip") {
         if (p->search_inventory(equip_name)) { // If exist in inventory. (Although checking not necessary)
+
+            // HP / MP potion no need equip. Consume and remove from inventory directly.
+            if (equip_name == "Health Potion (Restores 25% health)") {
+                p->change_inventory("remove", item_index - 1, "");
+                p->change_stat("HP", (int)(p->read_specific_stat("HP_MAX") * 0.25));
+            }
+            else if (equip_name == "Mage Potion (Restores 25% mp)") {
+                p->change_inventory("remove", item_index - 1, "");
+                p->change_stat("MP", (int)(p->read_specific_stat("MP_MAX") * 0.25));
+            }
+
             if (!(p->search_equipped(equip_name))) { // If not equipeed
-                p->change_equipeed("equip", equip_name);
+                p->change_equipeed("equip", equip_name); // Equip the item, add to equipped vector
                 p->change_stat("ATK", converter[equip_name].atk);
                 p->change_stat("DEF", converter[equip_name].def);
                 p->change_stat("WIS", converter[equip_name].wis);
@@ -47,8 +59,9 @@ bool equip(character_stats* p, std::string action, std::string equip_name) {
         return false;
     }
     else {
+        // Unequip
         if (p->search_equipped(equip_name)) {
-            p->change_equipeed("", equip_name);
+            p->change_equipeed("", equip_name); // Remove the item from equipped vector
             p->change_stat("ATK", -converter[equip_name].atk);
             p->change_stat("DEF", -converter[equip_name].def);
             p->change_stat("WIS", -converter[equip_name].wis);
