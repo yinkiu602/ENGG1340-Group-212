@@ -234,6 +234,7 @@ bool battle_system(character_stats* p, std::string enemy_name) {
 		// Damage calculation: Attack - defense. Defense can only neglect 80% damage. Except when user in defense mode
 		// If user choose to attack
 		if (user_input == 1) {
+			std::cout << "\033[2J\033[1;1H"; // Clear the screen and allow the lines to be printed on top
 			attack_damage_calculation = p->read_specific_stat("ATK") - to_fight.def;
 			if (attack_damage_calculation <= 0) { attack_damage_calculation = (int)p->read_specific_stat("ATK") * 0.2; }
 			// Reduce emeny hp base on damage calculated from the formula above.
@@ -249,6 +250,7 @@ bool battle_system(character_stats* p, std::string enemy_name) {
 		}
 		// Defense position for character.
 		else if (user_input == 2) {
+			std::cout << "\033[2J\033[1;1H"; // Clear the screen and allow the lines to be printed on top
 			// CHaracter defense is doubled. No 80% rule.
 			receive_damage_calculation = to_fight.atk - p->read_specific_stat("DEF") * 2;
 			if (receive_damage_calculation <= 0) { receive_damage_calculation = 0; }
@@ -259,6 +261,7 @@ bool battle_system(character_stats* p, std::string enemy_name) {
 		}
 		// Use inventory
 		else {
+			std::cout << "\033[2J\033[1;1H"; // Clear the screen and allow the lines to be printed on top
 			std::cout << "You currently have:" << std::endl;
 			// Print the inventory
 			p->display_inventory();
